@@ -1,4 +1,4 @@
 package com.marlon.CleanArchTeste.Domain.Exceptions;
 
-public class EntityNotFoundException {
+public class EntityNotFoundException extends RuntimeException {
 }
