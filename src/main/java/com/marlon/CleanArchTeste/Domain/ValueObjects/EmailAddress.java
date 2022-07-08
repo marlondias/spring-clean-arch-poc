@@ -17,7 +17,7 @@ public class EmailAddress implements ValueObject {
         if (emailAddress.isEmpty()) {
             throw new IllegalArgumentException("Endereço de e-mail não pode ser string vazia.");
         }
-        String patternValidEmail = "^[^\\.]([\\!\\#\\$\\%\\&\\'\\*\\+\\-\\/\\=\\?\\^\\_\\`\\{\\|\\}\\~\\.\\w\\d]+)[^\\.]@([\\-\\.\\w\\d]+)$";
+        String patternValidEmail = "^[^.]([!#$%&'*+\\-/=?^_`{|}~.\\w\\d]+)[^.]@([\\-.\\w]+)$";
         Matcher matcher = Pattern.compile(patternValidEmail).matcher(emailAddress);
         if (!matcher.find()) {
             throw new IllegalArgumentException("Endereço de e-mail não está em formato válido.");
