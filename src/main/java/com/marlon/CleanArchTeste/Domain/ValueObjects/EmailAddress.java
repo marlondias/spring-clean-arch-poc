@@ -12,7 +12,8 @@ public class EmailAddress implements ValueObject {
     protected String localPart;
     protected String domainPart;
 
-    public EmailAddress(String emailAddress) {
+    public EmailAddress(String emailAddress) throws IllegalArgumentException
+    {
         emailAddress = emailAddress.trim();
         if (emailAddress.isEmpty()) {
             throw new IllegalArgumentException("Endereço de e-mail não pode ser string vazia.");

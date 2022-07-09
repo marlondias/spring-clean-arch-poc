@@ -20,7 +20,7 @@ public class PersonName implements ValueObject {
         this.fullName = this.firstName;
     }
 
-    public PersonName(String firstName, String lastName)
+    public PersonName(String firstName, String lastName) throws IllegalArgumentException
     {
         if (firstName.isBlank()) {
             throw new IllegalArgumentException("Primeiro nome não pode ser string vazia.");

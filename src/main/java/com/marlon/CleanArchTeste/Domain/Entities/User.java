@@ -9,6 +9,8 @@ import com.marlon.CleanArchTeste.Domain.ValueObjects.EmailAddress;
 import com.marlon.CleanArchTeste.Domain.ValueObjects.PersonName;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 
 public class User extends Entity {
@@ -21,8 +23,18 @@ public class User extends Entity {
 
     @Override
     public Map<String, Object> toMap() {
-        return null;
-        //TODO
+        var map = new HashMap<String, Object>();
+        map.put("id", this.id);
+        map.put("name", (this.name != null) ? this.name.toMap() : null);
+        map.put("email", (this.email != null) ? this.email.toMap() : null);
+        map.put("hashedPassword", this.hashedPassword);
+
+        var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        map.put("emailVerifiedAt", (this.emailVerifiedAt != null) ? dateTimeFormatter.format(this.emailVerifiedAt) : null);
+        map.put("createdAt", (this.createdAt != null) ? dateTimeFormatter.format(this.createdAt) : null);
+        map.put("updatedAt", (this.updatedAt != null) ? dateTimeFormatter.format(this.updatedAt) : null);
+
+        return map;
     }
 
     public PersonName getName() {
@@ -128,7 +140,7 @@ public class User extends Entity {
 
     public boolean isEmailAddressAlreadyInUse(UserQueriesRepository repository, EmailAddress emailAddress) {
         try {
-            repository.findByEmail(emailAddress);
+            var user = repository.findByEmail(emailAddress);
             return true;
         } catch (EntityNotFoundException notFoundEx) {
             return false;
