@@ -49,33 +49,40 @@ public class User extends Entity {
         return updatedAt;
     }
 
-    public void setPersonName(String firstName, String lastName) {
+    public User setPersonName(String firstName, String lastName) {
         this.name = new PersonName(firstName, lastName);
+        return this;
     }
 
-    public void setEmailAddress(String emailAddress) {
+    public User setEmailAddress(String emailAddress) {
         this.email = new EmailAddress(emailAddress);
+        return this;
     }
 
-    public void setHashedPassword(String hashedPassword) {
+    public User setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
+        return this;
     }
 
-    public void setHashedPasswordFromPlainText(StringHashingService stringHashingService, String plainTextPassword) throws DomainException {
+    public User setHashedPasswordFromPlainText(StringHashingService stringHashingService, String plainTextPassword) throws DomainException {
         this.validatePasswordContent(plainTextPassword);
         this.hashedPassword = stringHashingService.getPasswordHash(plainTextPassword);
+        return this;
     }
 
-    public void setEmailVerifiedAt(String dateTime) {
+    public User setEmailVerifiedAt(String dateTime) {
         this.emailVerifiedAt = LocalDateTime.parse(dateTime);
+        return this;
     }
 
-    public void setCreatedAt(String dateTime) {
+    public User setCreatedAt(String dateTime) {
         this.createdAt = LocalDateTime.parse(dateTime);
+        return this;
     }
 
-    public void setUpdatedAt(String dateTime) {
+    public User setUpdatedAt(String dateTime) {
         this.updatedAt = LocalDateTime.parse(dateTime);
+        return this;
     }
 
     private void validatePasswordContent(String password) throws DomainException {
