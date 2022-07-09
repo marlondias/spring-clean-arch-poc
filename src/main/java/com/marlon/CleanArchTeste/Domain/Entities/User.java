@@ -1,5 +1,6 @@
 package com.marlon.CleanArchTeste.Domain.Entities;
 
+import com.marlon.CleanArchTeste.Domain.Contracts.Entity;
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserQueriesRepository;
 import com.marlon.CleanArchTeste.Domain.Contracts.Services.StringHashingService;
 import com.marlon.CleanArchTeste.Domain.Exceptions.DomainException;
@@ -8,14 +9,21 @@ import com.marlon.CleanArchTeste.Domain.ValueObjects.EmailAddress;
 import com.marlon.CleanArchTeste.Domain.ValueObjects.PersonName;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
-public class User {
+public class User extends Entity {
     protected PersonName name;
     protected EmailAddress email;
     protected String hashedPassword;
     protected LocalDateTime emailVerifiedAt;
     protected LocalDateTime createdAt;
     protected LocalDateTime updatedAt;
+
+    @Override
+    public Map<String, Object> toMap() {
+        return null;
+        //TODO
+    }
 
     public PersonName getName() {
         return name;
