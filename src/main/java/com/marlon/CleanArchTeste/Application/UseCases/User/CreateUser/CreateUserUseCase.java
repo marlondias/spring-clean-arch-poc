@@ -1,7 +1,6 @@
 package com.marlon.CleanArchTeste.Application.UseCases.User.CreateUser;
 
 import com.marlon.CleanArchTeste.Application.Contracts.UseCaseInteractor;
-import com.marlon.CleanArchTeste.Application.Exceptions.ApplicationException;
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserCommandsRepository;
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserQueriesRepository;
 import com.marlon.CleanArchTeste.Domain.Contracts.Services.StringHashingService;
@@ -23,7 +22,7 @@ public final class CreateUserUseCase implements UseCaseInteractor {
         this.stringHashingService = stringHashingService;
     }
 
-    public OutputBoundary handle(InputBoundary input) throws DomainException, ApplicationException {
+    public OutputBoundary handle(InputBoundary input) throws DomainException {
         var user = (new User())
             .setPersonName(input.getFirstName(), input.getLastName())
             .setEmailAddress(input.getEmailAddress())

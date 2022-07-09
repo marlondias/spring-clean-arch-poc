@@ -11,7 +11,7 @@ public final class OutputBoundary implements UseCaseOutputBoundary {
 
     public OutputBoundary(String message) {
         this.message = message;
-        users = new ArrayList<User>();
+        users = new ArrayList<>();
     }
 
     @Override

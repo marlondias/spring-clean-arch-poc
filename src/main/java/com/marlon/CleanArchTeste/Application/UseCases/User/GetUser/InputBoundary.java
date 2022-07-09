@@ -3,7 +3,7 @@ package com.marlon.CleanArchTeste.Application.UseCases.User.GetUser;
 import com.marlon.CleanArchTeste.Application.Contracts.UseCaseInputBoundary;
 
 public final class InputBoundary implements UseCaseInputBoundary {
-    private int userId;
+    private final int userId;
 
     public InputBoundary(int userId) {
         this.userId = userId;

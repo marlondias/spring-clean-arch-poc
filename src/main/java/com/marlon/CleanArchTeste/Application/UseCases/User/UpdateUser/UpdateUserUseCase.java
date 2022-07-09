@@ -1,6 +1,5 @@
 package com.marlon.CleanArchTeste.Application.UseCases.User.UpdateUser;
 
-import com.marlon.CleanArchTeste.Application.Exceptions.ApplicationException;
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserCommandsRepository;
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserQueriesRepository;
 import com.marlon.CleanArchTeste.Domain.Contracts.Services.StringHashingService;
@@ -22,7 +21,7 @@ public class UpdateUserUseCase {
         this.stringHashingService = stringHashingService;
     }
 
-    public OutputBoundary handle(InputBoundary input) throws DomainException, ApplicationException {
+    public OutputBoundary handle(InputBoundary input) throws DomainException {
         var user = this.userQueriesRepository.findById(input.getUserId());
         this.replaceUserAttributes(input, user);
         this.userCommandsRepository.update(user);

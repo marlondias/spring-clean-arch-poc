@@ -5,7 +5,7 @@ import com.marlon.CleanArchTeste.Application.Contracts.UseCaseInputBoundary;
 import java.util.Map;
 
 public final class InputBoundary implements UseCaseInputBoundary {
-    private int userId;
+    private final int userId;
     private String firstName;
     private String lastName;
     private String emailAddress;
