@@ -5,7 +5,9 @@ import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserQueriesR
 import com.marlon.CleanArchTeste.Domain.Contracts.Services.StringHashingService;
 import com.marlon.CleanArchTeste.Domain.Entities.User;
 import com.marlon.CleanArchTeste.Domain.Exceptions.DomainException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UpdateUserUseCase {
     private final UserCommandsRepository userCommandsRepository;
     private final UserQueriesRepository userQueriesRepository;

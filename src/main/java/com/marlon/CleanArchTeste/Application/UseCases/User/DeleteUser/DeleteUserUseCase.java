@@ -1,7 +1,9 @@
 package com.marlon.CleanArchTeste.Application.UseCases.User.DeleteUser;
 
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserCommandsRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DeleteUserUseCase {
     private final UserCommandsRepository userCommandsRepository;
 

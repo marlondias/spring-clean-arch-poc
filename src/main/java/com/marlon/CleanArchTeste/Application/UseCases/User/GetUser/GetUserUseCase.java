@@ -1,7 +1,9 @@
 package com.marlon.CleanArchTeste.Application.UseCases.User.GetUser;
 
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserQueriesRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GetUserUseCase {
     private final UserQueriesRepository userQueriesRepository;
 
