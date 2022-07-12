@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User extends Entity {
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     protected PersonName name;
     protected EmailAddress email;
     protected String hashedPassword;
@@ -29,7 +31,6 @@ public class User extends Entity {
         map.put("email", (this.email != null) ? this.email.toMap() : null);
         map.put("hashedPassword", this.hashedPassword);
 
-        var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         map.put("emailVerifiedAt", (this.emailVerifiedAt != null) ? dateTimeFormatter.format(this.emailVerifiedAt) : null);
         map.put("createdAt", (this.createdAt != null) ? dateTimeFormatter.format(this.createdAt) : null);
         map.put("updatedAt", (this.updatedAt != null) ? dateTimeFormatter.format(this.updatedAt) : null);
@@ -62,7 +63,7 @@ public class User extends Entity {
     }
 
     public User setPersonName(String firstName, String lastName) {
-        this.name = new PersonName(firstName, lastName);
+        this.name = (lastName.isEmpty()) ? new PersonName(firstName) : new PersonName(firstName, lastName);
         return this;
     }
 
@@ -83,17 +84,17 @@ public class User extends Entity {
     }
 
     public User setEmailVerifiedAt(String dateTime) {
-        this.emailVerifiedAt = LocalDateTime.parse(dateTime);
+        this.emailVerifiedAt = LocalDateTime.parse(dateTime, dateTimeFormatter);
         return this;
     }
 
     public User setCreatedAt(String dateTime) {
-        this.createdAt = LocalDateTime.parse(dateTime);
+        this.createdAt = LocalDateTime.parse(dateTime, dateTimeFormatter);
         return this;
     }
 
     public User setUpdatedAt(String dateTime) {
-        this.updatedAt = LocalDateTime.parse(dateTime);
+        this.updatedAt = LocalDateTime.parse(dateTime, dateTimeFormatter);
         return this;
     }
 
