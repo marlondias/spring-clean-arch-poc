@@ -4,13 +4,13 @@ import java.util.Map;
 
 public abstract class Entity {
 
-    protected int id;
+    protected long id;
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(int value) {
+    public void setId(long value) {
         if (value < 1) {
             throw new IllegalArgumentException("ID da entidade não pode ser nulo ou negativo.");
         }
