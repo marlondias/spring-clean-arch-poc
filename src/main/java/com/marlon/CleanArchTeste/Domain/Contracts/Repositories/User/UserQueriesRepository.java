@@ -2,8 +2,7 @@ package com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User;
 
 import com.marlon.CleanArchTeste.Domain.Entities.User;
 import com.marlon.CleanArchTeste.Domain.ValueObjects.EmailAddress;
-
-import java.util.Collection;
+import java.util.List;
 
 public interface UserQueriesRepository {
 
@@ -11,6 +10,6 @@ public interface UserQueriesRepository {
 
     User findByEmail(EmailAddress emailAddress);
 
-    Collection<User> getAll();
+    List<User> getAll();
 
 }
