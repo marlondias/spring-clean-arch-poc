@@ -3,14 +3,13 @@ package com.marlon.CleanArchTeste.Adapters.Repositories;
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserCommandsRepository;
 import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserQueriesRepository;
 import com.marlon.CleanArchTeste.Domain.Entities.User;
+import com.marlon.CleanArchTeste.Domain.Exceptions.EntityNotFoundException;
 import com.marlon.CleanArchTeste.Domain.ValueObjects.EmailAddress;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Component
 public class UserRepositoryImpl implements UserCommandsRepository, UserQueriesRepository {
@@ -22,32 +21,56 @@ public class UserRepositoryImpl implements UserCommandsRepository, UserQueriesRe
 
     @Override
     public void insert(User user) {
+        var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        var values = new HashMap<String, Object>();
+        values.put("name", user.getName().getFirstName());
+        values.put("email", user.getEmail().getFullAddress());
+        values.put("password", user.getHashedPassword());
+        values.put("email_verified_at", user.getEmailVerifiedAt().format(dateTimeFormatter));
 
+        //TODO
+        String sql = "INSERT INTO users (...) VALUES ()";
+        this.jdbcTemplate.update(sql, values);
     }
 
     @Override
     public void update(User user) {
+        var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        var values = new HashMap<String, Object>();
+        values.put("name", user.getName().getFirstName());
+        values.put("email", user.getEmail().getFullAddress());
+        values.put("password", user.getHashedPassword());
+        values.put("email_verified_at", user.getEmailVerifiedAt().format(dateTimeFormatter));
 
+        //TODO
+        String sql = "UPDATE users (...)";
+        this.jdbcTemplate.update(sql, values);
     }
 
     @Override
-    public void deleteById(int id) {
-
+    public void deleteById(long id) {
+        String sql = "DELETE FROM users WHERE id = ?";
+        var args = new Object[] {id};
+        this.jdbcTemplate.update(sql, args);
     }
 
     @Override
-    public User findById(int id) {
-        return null;
+    public User findById(long id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        var row = this.jdbcTemplate.queryForMap(sql, id);
+        return this.getUserFromRow(row);
     }
 
     @Override
     public User findByEmail(EmailAddress emailAddress) {
-        return null;
+        String sql = "SELECT * FROM users WHERE email = ?";
+        var row = this.jdbcTemplate.queryForMap(sql, emailAddress.getFullAddress());
+        return this.getUserFromRow(row);
     }
 
     @Override
     public List<User> getAll() {
-        String sql = "SELECT * FROm users";
+        String sql = "SELECT * FROM users";
         var rows = this.jdbcTemplate.queryForList(sql);
         var users = new ArrayList<User>();
         for (var row : rows) {

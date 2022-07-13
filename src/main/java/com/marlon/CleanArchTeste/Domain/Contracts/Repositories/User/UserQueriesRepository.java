@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserQueriesRepository {
 
-    User findById(int id);
+    User findById(long id);
 
     User findByEmail(EmailAddress emailAddress);
 

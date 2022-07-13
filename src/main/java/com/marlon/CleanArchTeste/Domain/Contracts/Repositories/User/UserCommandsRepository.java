@@ -9,6 +9,6 @@ public interface UserCommandsRepository extends CommandsRepository {
 
     void update(User user);
 
-    void deleteById(int id);
+    void deleteById(long id);
 
 }
