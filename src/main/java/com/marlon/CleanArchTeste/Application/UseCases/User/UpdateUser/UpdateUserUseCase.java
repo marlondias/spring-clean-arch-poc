@@ -5,6 +5,7 @@ import com.marlon.CleanArchTeste.Domain.Contracts.Repositories.User.UserQueriesR
 import com.marlon.CleanArchTeste.Domain.Contracts.Services.StringHashingService;
 import com.marlon.CleanArchTeste.Domain.Entities.User;
 import com.marlon.CleanArchTeste.Domain.Exceptions.DomainException;
+import com.marlon.CleanArchTeste.Domain.Exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,6 +26,9 @@ public class UpdateUserUseCase {
 
     public OutputBoundary handle(UpdateUserInputBoundary input) throws DomainException {
         var user = this.userQueriesRepository.findById(input.getUserId());
+        if (user == null) {
+            throw new EntityNotFoundException();
+        }
         this.replaceUserAttributes(input, user);
         this.userCommandsRepository.update(user);
         return new OutputBoundary("Usuário " + input.getUserId() + " foi atualizado!");

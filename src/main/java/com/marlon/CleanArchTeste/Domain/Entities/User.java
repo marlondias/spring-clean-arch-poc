@@ -140,12 +140,8 @@ public class User extends Entity {
     }
 
     public boolean isEmailAddressAlreadyInUse(UserQueriesRepository repository, EmailAddress emailAddress) {
-        try {
-            var user = repository.findByEmail(emailAddress);
-            return true;
-        } catch (EntityNotFoundException notFoundEx) {
-            return false;
-        }
+        var user = repository.findByEmail(emailAddress);
+        return user != null;
     }
 
 }
