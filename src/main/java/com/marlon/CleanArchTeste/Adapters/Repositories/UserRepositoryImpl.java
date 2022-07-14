@@ -22,29 +22,36 @@ public class UserRepositoryImpl implements UserCommandsRepository, UserQueriesRe
     @Override
     public void insert(User user) {
         var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        var values = new HashMap<String, Object>();
-        values.put("name", user.getName().getFirstName());
-        values.put("email", user.getEmail().getFullAddress());
-        values.put("password", user.getHashedPassword());
-        values.put("email_verified_at", user.getEmailVerifiedAt().format(dateTimeFormatter));
+        var name = user.getName().getFirstName();
+        var email = user.getEmail().getFullAddress();
+        var password = user.getHashedPassword();
+        var emailVerifiedAt = user.getEmailVerifiedAt() != null
+                ? user.getEmailVerifiedAt().format(dateTimeFormatter) : null;
 
-        //TODO
-        String sql = "INSERT INTO users (...) VALUES ()";
-        this.jdbcTemplate.update(sql, values);
+        String sql = "INSERT INTO " +
+                "users (name, email, password, email_verified_at) " +
+                "VALUES (?, ?, ?, ?);";
+
+        this.jdbcTemplate.update(sql, name, email, password, emailVerifiedAt);
     }
 
     @Override
     public void update(User user) {
         var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        var values = new HashMap<String, Object>();
-        values.put("name", user.getName().getFirstName());
-        values.put("email", user.getEmail().getFullAddress());
-        values.put("password", user.getHashedPassword());
-        values.put("email_verified_at", user.getEmailVerifiedAt().format(dateTimeFormatter));
+        var name = user.getName().getFirstName();
+        var email = user.getEmail().getFullAddress();
+        var password = user.getHashedPassword();
+        var emailVerifiedAt = user.getEmailVerifiedAt() != null
+                ? user.getEmailVerifiedAt().format(dateTimeFormatter) : null;
 
-        //TODO
-        String sql = "UPDATE users (...)";
-        this.jdbcTemplate.update(sql, values);
+        String sql = "UPDATE users SET " +
+                "name = ?, " +
+                "email = ?, " +
+                "password = ?, " +
+                "email_verified_at = ? " +
+                "WHERE id = ?";
+
+        this.jdbcTemplate.update(sql, name, email, password, emailVerifiedAt, user.getId());
     }
 
     @Override
@@ -57,15 +64,15 @@ public class UserRepositoryImpl implements UserCommandsRepository, UserQueriesRe
     @Override
     public User findById(long id) {
         String sql = "SELECT * FROM users WHERE id = ?";
-        var row = this.jdbcTemplate.queryForMap(sql, id);
-        return this.getUserFromRow(row);
+        var rows = this.jdbcTemplate.queryForList(sql, id);
+        return rows.isEmpty() ? null : this.getUserFromRow(rows.get(0));
     }
 
     @Override
     public User findByEmail(EmailAddress emailAddress) {
         String sql = "SELECT * FROM users WHERE email = ?";
-        var row = this.jdbcTemplate.queryForMap(sql, emailAddress.getFullAddress());
-        return this.getUserFromRow(row);
+        var rows = this.jdbcTemplate.queryForList(sql, emailAddress.getFullAddress());
+        return rows.isEmpty() ? null : this.getUserFromRow(rows.get(0));
     }
 
     @Override
