@@ -4,14 +4,14 @@ import com.marlon.CleanArchTeste.Application.Contracts.UseCaseInputBoundary;
 
 import java.util.Map;
 
-public final class InputBoundary implements UseCaseInputBoundary {
+public final class UpdateUserInputBoundary implements UseCaseInputBoundary {
     private final int userId;
     private String firstName;
     private String lastName;
     private String emailAddress;
     private String password;
 
-    public InputBoundary(int userId, Map<String, String> changedAttributes) throws Exception {
+    public UpdateUserInputBoundary(int userId, Map<String, String> changedAttributes) throws Exception {
         this.userId = userId;
         boolean someValidKeyWasPassed = false;
 

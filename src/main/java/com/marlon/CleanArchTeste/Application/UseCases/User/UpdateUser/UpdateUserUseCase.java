@@ -23,14 +23,14 @@ public class UpdateUserUseCase {
         this.stringHashingService = stringHashingService;
     }
 
-    public OutputBoundary handle(InputBoundary input) throws DomainException {
+    public OutputBoundary handle(UpdateUserInputBoundary input) throws DomainException {
         var user = this.userQueriesRepository.findById(input.getUserId());
         this.replaceUserAttributes(input, user);
         this.userCommandsRepository.update(user);
         return new OutputBoundary("Usuário " + input.getUserId() + " foi atualizado!");
     }
 
-    private void replaceUserAttributes(InputBoundary input, User user) throws DomainException {
+    private void replaceUserAttributes(UpdateUserInputBoundary input, User user) throws DomainException {
         if (input.getEmailAddress() != null) {
             user.setEmailAddress(input.getEmailAddress());
         }

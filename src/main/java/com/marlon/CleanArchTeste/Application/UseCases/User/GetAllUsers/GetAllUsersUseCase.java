@@ -12,7 +12,7 @@ public class GetAllUsersUseCase {
         this.userQueriesRepository = userQueriesRepository;
     }
 
-    public OutputBoundary handle(InputBoundary input) {
+    public OutputBoundary handle(GetAllUsersInputBoundary input) {
         var users = this.userQueriesRepository.getAll();
         if (users.isEmpty()) {
             return new OutputBoundary("Nenhum usuário encontrado!");

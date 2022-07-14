@@ -11,7 +11,7 @@ public class DeleteUserUseCase {
         this.userCommandsRepository = userCommandsRepository;
     }
 
-    public OutputBoundary handle(InputBoundary input) {
+    public OutputBoundary handle(DeleteUserInputBoundary input) {
         this.userCommandsRepository.deleteById(input.getUserId());
         return new OutputBoundary("Usuário " + input.getUserId() + " foi deletado!");
     }

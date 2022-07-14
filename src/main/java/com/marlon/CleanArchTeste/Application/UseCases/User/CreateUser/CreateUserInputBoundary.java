@@ -2,13 +2,13 @@ package com.marlon.CleanArchTeste.Application.UseCases.User.CreateUser;
 
 import com.marlon.CleanArchTeste.Application.Contracts.UseCaseInputBoundary;
 
-public final class InputBoundary implements UseCaseInputBoundary {
+public final class CreateUserInputBoundary implements UseCaseInputBoundary {
     private final String firstName;
     private final String lastName;
     private final String emailAddress;
     private final String password;
 
-    public InputBoundary(String firstName, String lastName, String emailAddress, String password) {
+    public CreateUserInputBoundary(String firstName, String lastName, String emailAddress, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;

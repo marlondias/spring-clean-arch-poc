@@ -11,7 +11,7 @@ public class GetUserUseCase {
         this.userQueriesRepository = userQueriesRepository;
     }
 
-    public OutputBoundary handle(InputBoundary input) {
+    public OutputBoundary handle(GetUserInputBoundary input) {
         var user = this.userQueriesRepository.findById(input.getUserId());
         var output = new OutputBoundary("Usuário encontrado!");
         output.setUser(user);
